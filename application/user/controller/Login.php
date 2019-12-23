@@ -17,7 +17,7 @@ class login{
 		$password = $data['password'];
 		$user =  User::where(['username'=>$username])->find();
 		if(!empty($user)){
-			if($username == $user['username'] && $password == $user['password']){
+			if($username == $user['username'] && md5($password) == $user['password']){
                 $msg = [
                     'status' => 1001,
                     'msg' => '登录成功',

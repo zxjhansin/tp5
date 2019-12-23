@@ -7,9 +7,17 @@ use Firebase\JWT\JWT;
 use think\Controller;
 
 class Base extends Controller{
+	
+	
+	public function __construct(Request $request = null)
+    {
+        parent::__construct($request);
+	}
+	
 	public function _initialize(){
 		parent::_initialize();
 	}
+	
 	public function checkToken(){
 		$header = Request::instance()->header();
 		if(!isset($header['authorization']) || $header['authorization'] == 'null'){
@@ -66,4 +74,17 @@ class Base extends Controller{
             return $e;
         }
 	}
+	
+	protected function returnJson($code, $msg, $data = [], $count = 0)
+    {
+
+        $data = [
+            'code' => $code,
+            'msg' => $msg,
+            'data' => $data,
+            'count' => $count,
+        ];
+        echo json_encode($data, JSON_UNESCAPED_UNICODE);
+        die;
+    }
 }

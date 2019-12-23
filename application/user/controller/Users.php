@@ -2,18 +2,20 @@
 namespace app\user\controller;
 use app\user\model\User;
 use think\Request;
-
+use think\Config;
 class Users extends Base
 {
 	public function __construct(Request $request = null)
     {
 		$this->request = $request;
+		$this->code = Config::get("code");
     }
     //GET list
     public function index()
     {
-		$account = $this->checkToken();
-		print_r(User::get(['id'=>$account['user_id']]));
+		$this->checkToken();
+		$users = User::index($_GET);
+		$this->returnJson($this->code['success']['code'],$this->code['success']['msg'],$users['data'],$users['count']);
     }
 	//POST insert
 	public function save(){
@@ -23,7 +25,8 @@ class Users extends Base
 	
     //GET read
 	public function read($id){
-		echo "read";
+		$user = User::read($id);
+		$this->returnJson($this->code['success']['code'],$this->code['success']['msg'],$user);
     }    
 	
     //PUT update
