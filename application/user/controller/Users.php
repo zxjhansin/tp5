@@ -1,16 +1,24 @@
 <?php
 namespace app\user\controller;
+use app\user\model\User;
+use think\Request;
 
-class User
+class Users extends Base
 {
+	public function __construct(Request $request = null)
+    {
+		$this->request = $request;
+    }
     //GET list
     public function index()
     {
-		echo "index";
+		$account = $this->checkToken();
+		print_r(User::get(['id'=>$account['user_id']]));
     }
 	//POST insert
 	public function save(){
-		
+		$data = $this->request->post()['data'];
+		User::createUser($data);
 	}
 	
     //GET read
