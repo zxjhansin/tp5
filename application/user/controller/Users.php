@@ -31,6 +31,8 @@ class Users extends Base
 	
     //PUT update
     public function update($id){
+		$data = input('put.');//必须是x-www-form-urlencoded
+		User:updateUser($id,$data['data']);
 		echo "edit";
     }   
 	

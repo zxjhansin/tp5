@@ -32,6 +32,12 @@ Class User extends Model{
 		$user = User::get(['id' => $item])->toArray();
 		return $user;
 	}
-    
+	
+    static public function updateUser($id,$item){
+		$item = json_decode($item,true);
+		$user = new User;
+		$user->save($item,['id' => $id]);
+		return $user;
+	}
 	
 }
