@@ -7,11 +7,12 @@ use think\Model;
 Class User extends Model{
 
 	static public function createUser($data){
-		$user = new User;
+		//$user = new User;
 		$items = json_decode($data,true);
 		foreach($items as $item){
 			$item['password'] = md5($item['password']);
-			$user->allowField(true)->save($item);
+			//$user->allowField(true)->save($item);
+			User::create($item);
 		}
 	}
 	
@@ -35,9 +36,8 @@ Class User extends Model{
 	
     static public function updateUser($id,$item){
 		$item = json_decode($item,true);
-		$user = new User;
-		$user->save($item,['id' => $id]);
-		return $user;
+		User::update($item,['id' => $id]);
+		return true;
 	}
 	
 }
