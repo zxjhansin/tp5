@@ -3,6 +3,7 @@ namespace app\user\model;
 
 use think\Cache;
 use think\Model;
+use think\Db;
 
 Class User extends Model{
 
@@ -11,6 +12,7 @@ Class User extends Model{
 		$items = json_decode($data,true);
 		foreach($items as $item){
 			$item['password'] = md5($item['password']);
+			$item['status'] =1;
 			//$user->allowField(true)->save($item);
 			User::create($item);
 		}
@@ -18,12 +20,8 @@ Class User extends Model{
 	
 	static public function index($item){
 		$limit = $item['limit'];
-		$where = [];
-        $result = self::alias('u')
-            ->order('id desc')
-            ->where($where) 
-            ->field("u.*")
-            ->paginate($limit,false);
+		$where = ['status'=>1];
+		$result = User::where($where)->paginate($limit,false);
         $res['data'] = $result->items();
         $res['count'] = $result->total();
 		return $res;

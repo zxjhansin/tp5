@@ -11,15 +11,16 @@
 
 return [
     // 数据库类型
-    'type'            => 'mysql',
+    'type'            => '\think\mongo\Connection',
+    'query'          => '\think\mongo\Query',
     // 服务器地址
     'hostname'        => '127.0.0.1',
     // 数据库名
     'database'        => 'pingeban',
     // 用户名
-    'username'        => 'root',
+    'username'        => '',
     // 密码
-    'password'        => '123456',
+    'password'        => '',
     // 端口
     'hostport'        => '',
     // 连接dsn
@@ -52,4 +53,6 @@ return [
     'datetime_format' => 'Y-m-d H:i:s',
     // 是否需要进行SQL性能分析
     'sql_explain'     => false,
+    // MongoDb默认的主键是_id并且是一个ObjectID对象，如果需要和mysql一样使用id作为主键
+    'pk_convert_id' => true,
 ];

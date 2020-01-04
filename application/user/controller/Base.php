@@ -84,7 +84,7 @@ class Base extends Controller{
             'data' => $data,
             'count' => $count,
         ];
-        echo json_encode($data, JSON_UNESCAPED_UNICODE);
+        echo json_encode($data, JSON_UNESCAPED_UNICODE|JSON_PRETTY_PRINT);
         die;
     }
 }
