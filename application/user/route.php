@@ -21,5 +21,5 @@
 
 ];  */
 use think\Route;
-Route::resource('user','user/Users');
-Route::resource('login','user/Login');
+Route::resource('v1/user','user/Users');
+Route::resource('v1/user/login','user/Login');
